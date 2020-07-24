@@ -4,7 +4,7 @@ const { querySchema } = require('./resources/schema');
 
 module.exports = {
     getRoutes: (app) => {
-        app.use('/member', graphqlHTTP({
+        app.use('/search-member', graphqlHTTP({
             schema: querySchema,
             graphiql: true
         }));
