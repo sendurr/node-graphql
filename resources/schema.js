@@ -55,6 +55,14 @@ const RootQueryType = new GraphQLObjectType({
     name: "Query",
     description: "Root Query",
     fields: () => ({
+        member: {
+            type: MembersType,
+            description: "Returns a member",
+            args: {
+                id: { type: GraphQLInt }
+            },
+            resolve: (parent, args) => data.members.find(member => member.id === args.id)
+        },
         members: {
             type: new GraphQLList(MembersType),
             description: "List of members",
