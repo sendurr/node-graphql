@@ -19,6 +19,12 @@ const MembersType = new GraphQLObjectType({
             resolve: (member) => {
                 return data.personalInfo.find(personalInfo => personalInfo.id === member.personalInfoId)
             }
+        },
+        planInfo: {
+            type: PlanInfoType,
+            resolve: (member) => {
+                return data.planInfo.find(planInfo => planInfo.id === member.planInfoId)
+            }
         }
     })
 });
