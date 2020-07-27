@@ -13,11 +13,17 @@ const MembersType = new GraphQLObjectType({
         id: { type: GraphQLNonNull(GraphQLInt)},
         relationShip: { type: GraphQLNonNull(GraphQLString)},
         personalInfoId: { type: GraphQLNonNull(GraphQLInt)},
-        planInfoId: { type: GraphQLNonNull(GraphQLInt)}
+        planInfoId: { type: GraphQLNonNull(GraphQLInt)},
+        personalInfo: {
+            type: PersonalInfoType,
+            resolve: (member) => {
+                return data.personalInfo.find(personalInfo => personalInfo.id === member.personalInfoId)
+            }
+        }
     })
 });
 
-const PersonalInfo = new GraphQLObjectType({
+const PersonalInfoType = new GraphQLObjectType({
     name: "PersonalInfo",
     description: "Personal info",
     fields: () => ({
@@ -28,7 +34,7 @@ const PersonalInfo = new GraphQLObjectType({
     })
 });
 
-const PlanInfo = new GraphQLObjectType({
+const PlanInfoType = new GraphQLObjectType({
     name: "planInfo",
     description: "plan  info",
     fields: () => ({
@@ -49,12 +55,12 @@ const RootQueryType = new GraphQLObjectType({
             resolve: () => data.members
         },
         personalInfos: {
-            type: new GraphQLList(PersonalInfo),
+            type: new GraphQLList(PersonalInfoType),
             description: "List of Personal Info",
             resolve: () => data.personalInfo
         },
         planInfos: {
-            type: new GraphQLList(PlanInfo),
+            type: new GraphQLList(PlanInfoType),
             description: "List of Plans",
             resolve: () => data.planInfo
         }
