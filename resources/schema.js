@@ -1,5 +1,6 @@
 "use strict"
 const data = require("./data");
+const services = require("../services");
 
 const {
     GraphQLSchema, GraphQLObjectType, GraphQLString,
@@ -17,13 +18,13 @@ const MembersType = new GraphQLObjectType({
         personalInfo: {
             type: PersonalInfoType,
             resolve: (member) => {
-                return data.personalInfo.find(personalInfo => personalInfo.id === member.personalInfoId)
+                return services.personalInfoFindById(member.personalInfoId)
             }
         },
         planInfo: {
             type: PlanInfoType,
             resolve: (member) => {
-                return data.planInfo.find(planInfo => planInfo.id === member.planInfoId)
+                return services.planInfoInfoFindById(member.planInfoId)
             }
         }
     })
@@ -61,22 +62,23 @@ const RootQueryType = new GraphQLObjectType({
             args: {
                 id: { type: GraphQLInt }
             },
-            resolve: (parent, args) => data.members.find(member => member.id === args.id)
+            // resolve: (parent, args) => data.members.find(member => member.id === args.id)
+            resolve: (parent, args) => services.membersFindById(args.id)
         },
         members: {
             type: new GraphQLList(MembersType),
             description: "List of members",
-            resolve: () => data.members
+            resolve: () => services.membersListAll()
         },
         personalInfos: {
             type: new GraphQLList(PersonalInfoType),
             description: "List of Personal Info",
-            resolve: () => data.personalInfo
+            resolve: () => services.personalInfoListAll()
         },
         planInfos: {
             type: new GraphQLList(PlanInfoType),
             description: "List of Plans",
-            resolve: () => data.planInfo
+            resolve: () => services.planInfoListAll()
         }
     })
 });
