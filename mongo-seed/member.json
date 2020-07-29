@@ -1,0 +1,6 @@
+[
+  { "id": 1, "relationShip": "subscriber", "personalInfoId": 1 , "planInfoId": 1 },
+  { "id": 2, "relationShip": "spouse", "personalInfoId": 2 , "planInfoId": 2 },
+  { "id": 3, "relationShip": "child", "personalInfoId": 3 , "planInfoId": 2 },
+  { "id": 4, "relationShip": "subscriber", "personalInfoId": 4 , "planInfoId": 1 }
+]
