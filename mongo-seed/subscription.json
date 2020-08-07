@@ -1,0 +1,6 @@
+[
+  { id: 1, contractId: 2345, coverages: [1, 5] },
+  { id: 2, contractId: 5956, coverages: [2] },
+  { id: 3, contractId: 3970, coverages: [3] },
+  { id: 4, contractId: 7305, coverages: [4] },
+]

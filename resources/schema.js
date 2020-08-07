@@ -35,6 +35,7 @@ const PersonInfoType = new GraphQLObjectType({
         id: { type: GraphQLNonNull(GraphQLInt)},
         firstName: { type: GraphQLNonNull(GraphQLString)},
         middleName: { type: GraphQLNonNull(GraphQLString)},
+        lastName: { type: GraphQLNonNull(GraphQLString)},
         dob: { type: GraphQLNonNull(GraphQLString)},
         title: { type: GraphQLNonNull(GraphQLString)},
         ssn: { type: GraphQLNonNull(GraphQLString)}
@@ -75,12 +76,30 @@ const RootQueryType = new GraphQLObjectType({
     fields: () => ({
         member: {
             type: MembersType,
-            description: "Returns a member",
+            description: "Returns a member for the given id.",
             args: {
-                id: { type: GraphQLInt }
+                id: { type: GraphQLNonNull(GraphQLInt) }
             },
             // resolve: (parent, args) => data.members.find(member => member.id === args.id)
             resolve: (parent, args) => services.membersFindById(args.id)
+        },
+        memberByRelationShip: {
+            type: new GraphQLList(MembersType),
+            description: "Returns members for the given relationship.",
+            args: {
+                relationShip: { type: GraphQLNonNull(GraphQLString) }
+            },
+            resolve: (parent, args) => services.membersFindByRelationShip(args.relationShip)
+        },
+        memberByNames: {
+            type: new GraphQLList(MembersType),
+            description: "Returns members for the given names.",
+            args: {
+                firstName: { type: GraphQLNonNull(GraphQLString) },
+                middleName: { type: GraphQLNonNull(GraphQLString) },
+                lastName: { type: GraphQLNonNull(GraphQLString) }
+            },
+            resolve: (parent, args) => services.membersFindByNames(args.firstName, args.middleName, args.lastName)
         },
         // members: {
         //     type: new GraphQLList(MembersType),
