@@ -1,0 +1,6 @@
+[
+  { id: 1, firstName: "Steve", middleName: "", lastName: "Jobs", dob: "01/01/2001", title: "Mr", ssn: "XXXXXXX989" },
+  { id: 2, firstName: "Bill", middleName: "H", lastName: "Gates", dob: "01/01/1990", title: "Mr", ssn: "XXXXXXX097" },
+  { id: 3, firstName: "Jeff", middleName: "L", lastName: "Bezos", dob: "01/01/1980", title: "Mr", ssn: "XXXXXXX142" },
+  { id: 4, firstName: "Elon", middleName: "", lastName: "Musk", dob: "01/01/1964", title: "Mr", ssn: "XXXXXXX501" }
+]

@@ -4,8 +4,8 @@ const Schema = mongo.Schema;
 const memberSchema = new Schema({
     id: Number,
     relationShip: String,
-    personalInfoId: Number,
-    planInfoId: Number
+    personInfo: Number,
+    subscription: Number
 });
 
 module.exports = mongo.model('member', memberSchema, 'member');

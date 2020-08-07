@@ -1,6 +1,6 @@
 [
-  { "id": 1, "relationShip": "subscriber", "personalInfoId": 1 , "planInfoId": 1 },
-  { "id": 2, "relationShip": "spouse", "personalInfoId": 2 , "planInfoId": 2 },
-  { "id": 3, "relationShip": "child", "personalInfoId": 3 , "planInfoId": 2 },
-  { "id": 4, "relationShip": "subscriber", "personalInfoId": 4 , "planInfoId": 1 }
+  { id: 1, relationShip: "subscriber", personInfo: 1 , subscription: 1 },
+  { id: 2, relationShip: "spouse", personInfo: 2 , subscription: 1 },
+  { id: 3, relationShip: "child", personInfo: 3 , subscription: 1 },
+  { id: 4, relationShip: "subscriber", personInfo: 4 , subscription: 4 }
 ]

@@ -1,6 +1,0 @@
-[
-  { "id": 1, "planName": "Delta Care HMO", "planCode": "CAA54", "issuer": "DELTA" },
-  { "id": 2, "planName": "Delta PPO Premium", "planCode": "PREMIUM55", "issuer": "DELTA" },
-  { "id": 3, "planName": "Delta PPO Premium", "planCode": "PREMIUM002", "issuer": "AARP" },
-  { "id": 4, "planName": "Delta PPO  Basic", "planCode": "BASIC0001", "issuer": "AARP" }
-]
