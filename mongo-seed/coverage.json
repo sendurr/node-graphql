@@ -1,0 +1,7 @@
+[
+  { "id": 1, "planName": "Delta Care HMO", "planCode": "CAA54", "issuer": "DELTA", "effStrtDt": "01/01/2020", "effEndDt": "12/31/2020" },
+  { "id": 2, "planName": "Delta PPO Premium", "planCode": "PREMIUM55", "issuer": "DELTA", "effStrtDt": "01/01/2020", "effEndDt": "12/31/2020" },
+  { "id": 3, "planName": "Delta PPO Premium", "planCode": "PREMIUM002", "issuer": "AARP", "effStrtDt": "01/01/2020", "effEndDt": "12/31/2020" },
+  { "id": 4, "planName": "Delta PPO  Basic", "planCode": "BASIC0001", "issuer": "AARP", "effStrtDt": "01/01/2020", "effEndDt": "12/31/2020" },
+  { "id": 5, "planName": "Costco PPO  Basic", "planCode": "COSTC0001", "issuer": "COSTCO", "effStrtDt": "01/01/2017", "effEndDt": "12/31/2017" }
+]
