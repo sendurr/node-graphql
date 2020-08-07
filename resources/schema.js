@@ -13,42 +13,59 @@ const MembersType = new GraphQLObjectType({
     fields: () => ({
         id: { type: GraphQLNonNull(GraphQLInt)},
         relationShip: { type: GraphQLNonNull(GraphQLString)},
-        personalInfoId: { type: GraphQLNonNull(GraphQLInt)},
-        planInfoId: { type: GraphQLNonNull(GraphQLInt)},
-        personalInfo: {
-            type: PersonalInfoType,
+        personInfo: {
+            type: PersonInfoType,
             resolve: (member) => {
-                return services.personalInfoFindById(member.personalInfoId)
+                return services.personInfoFindById(member.personInfo)
             }
         },
-        planInfo: {
-            type: PlanInfoType,
+        subscription: {
+            type: subscriptionType,
             resolve: (member) => {
-                return services.planInfoInfoFindById(member.planInfoId)
+                return services.subscriptionFindById(member.subscription)
             }
         }
     })
 });
 
-const PersonalInfoType = new GraphQLObjectType({
-    name: "PersonalInfo",
-    description: "Personal info",
+const PersonInfoType = new GraphQLObjectType({
+    name: "personInfo",
+    description: "Person info",
     fields: () => ({
         id: { type: GraphQLNonNull(GraphQLInt)},
         firstName: { type: GraphQLNonNull(GraphQLString)},
         middleName: { type: GraphQLNonNull(GraphQLString)},
-        lastName: { type: GraphQLNonNull(GraphQLString)}
+        dob: { type: GraphQLNonNull(GraphQLString)},
+        title: { type: GraphQLNonNull(GraphQLString)},
+        ssn: { type: GraphQLNonNull(GraphQLString)}
     })
 });
 
-const PlanInfoType = new GraphQLObjectType({
-    name: "planInfo",
-    description: "plan  info",
+const subscriptionType = new GraphQLObjectType({
+    name: "subscription",
+    description: "subscription",
+    fields: () => ({
+        id: { type: GraphQLNonNull(GraphQLInt)},
+        contractId: { type: GraphQLNonNull(GraphQLInt)},
+        coverages: {
+            type: new GraphQLList(coverageType),
+            resolve: (subscription) => {
+                return services.coverageFindByManyId(subscription.coverages)
+            }
+        }
+    })
+});
+
+const coverageType = new GraphQLObjectType({
+    name: "coverageInfo",
+    description: "coverage",
     fields: () => ({
         id: { type: GraphQLNonNull(GraphQLInt)},
         planName: { type: GraphQLNonNull(GraphQLString)},
         planCode: { type: GraphQLNonNull(GraphQLString)},
-        issuer: { type: GraphQLNonNull(GraphQLString)}
+        issuer: { type: GraphQLNonNull(GraphQLString)},
+        effStrtDt: { type: GraphQLNonNull(GraphQLString)},
+        effEndDt: { type: GraphQLNonNull(GraphQLString)}
     })
 });
 
@@ -65,21 +82,21 @@ const RootQueryType = new GraphQLObjectType({
             // resolve: (parent, args) => data.members.find(member => member.id === args.id)
             resolve: (parent, args) => services.membersFindById(args.id)
         },
-        members: {
-            type: new GraphQLList(MembersType),
-            description: "List of members",
-            resolve: () => services.membersListAll()
-        },
-        personalInfos: {
-            type: new GraphQLList(PersonalInfoType),
-            description: "List of Personal Info",
-            resolve: () => services.personalInfoListAll()
-        },
-        planInfos: {
-            type: new GraphQLList(PlanInfoType),
-            description: "List of Plans",
-            resolve: () => services.planInfoListAll()
-        }
+        // members: {
+        //     type: new GraphQLList(MembersType),
+        //     description: "List of members",
+        //     resolve: () => services.membersListAll()
+        // },
+        // personalInfos: {
+        //     type: new GraphQLList(PersonalInfoType),
+        //     description: "List of Personal Info",
+        //     resolve: () => services.personalInfoListAll()
+        // },
+        // planInfos: {
+        //     type: new GraphQLList(PlanInfoType),
+        //     description: "List of Plans",
+        //     resolve: () => services.planInfoListAll()
+        // }
     })
 });
 

@@ -3,8 +3,8 @@ const express = require('express');
 const app = express();
 
 const mongo = require('mongoose');
-// const url = "mongodb://localhost:27017";
-const url = "mongodb://mongo:27017";
+const url = "mongodb://localhost:27017";
+// const url = "mongodb://mongo:27017";
 const dbName = "mydb";
 
 mongo.connect(`${url}/${dbName}`, {

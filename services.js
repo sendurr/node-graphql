@@ -1,6 +1,7 @@
-const PersonalInfo = require("./mongo-models/personalInfo");
+const Person = require("./mongo-models/person");
 const Member = require("./mongo-models/member");
-const PlanInfo = require("./mongo-models/planInfo");
+const Subscription = require("./mongo-models/subscription");
+const Coverage = require("./mongo-models/coverage");
 
 const personalInfoListAll = () => {
     console.log("Starting executing personalInfoListAll service");
@@ -15,12 +16,14 @@ const personalInfoListAll = () => {
 
 const membersListAll = () => {
     console.log("Starting executing membersListAll service");
-
-    const data = Member.find({});
-
-    console.log("Completed executing membersListAll service");
-
-    return data;
+    try {
+        const data = Member.find({});
+        console.log("Completed executing membersListAll service");
+        return data;
+    } catch(e) {
+        console.log(e);
+        return {}
+    }
 
 };
 
@@ -37,32 +40,45 @@ const planInfoListAll = () => {
 
 const membersFindById = (id) => {
     console.log("Starting executing membersFindById service");
+    try {
+        const data = Member.findOne({ id: id });
+        console.log("Completed executing membersFindById service");
+        return data;
+    } catch(e) {
+        console.log(e);
+        return {}
+    }
 
-    const data = Member.findOne({ id: id });
+};
 
-    console.log("Completed executing membersFindById service");
+const personInfoFindById = (id) => {
+    console.log("Starting executing personInfoFindById service");
+
+    const data = Person.findOne({ id: id });
+
+    console.log("Completed executing personInfoFindById service");
 
     return data;
 
 };
 
-const personalInfoFindById = (id) => {
-    console.log("Starting executing personalInfoFindById service");
+const subscriptionFindById = (id) => {
+    console.log("Starting executing subscriptionFindById service");
 
-    const data = PersonalInfo.findOne({ id: id });
+    const data = Subscription.findOne({ id: id });
 
-    console.log("Completed executing personalInfoFindById service");
+    console.log("Completed executing subscriptionFindById service");
 
     return data;
 
 };
 
-const planInfoInfoFindById = (id) => {
-    console.log("Starting executing planInfoInfoFindById service");
+const coverageFindByManyId = (ids) => {
+    console.log("Starting executing coverageFindByManyId service");
 
-    const data = PlanInfo.findOne({ id: id });
+    const data = Coverage.find({id: {$in: ids } });
 
-    console.log("Completed executing planInfoInfoFindById service");
+    console.log("Completed executing coverageFindByManyId service");
 
     return data;
 
@@ -73,6 +89,7 @@ module.exports = {
     membersListAll: membersListAll,
     planInfoListAll: planInfoListAll,
     membersFindById: membersFindById,
-    personalInfoFindById: personalInfoFindById,
-    planInfoInfoFindById: planInfoInfoFindById
+    personInfoFindById: personInfoFindById,
+    subscriptionFindById: subscriptionFindById,
+    coverageFindByManyId: coverageFindByManyId
 }
